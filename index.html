@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Notifications</title>
+</head>
+<body>
+    <p>Javascript Notifications</p>
+    <script>
+        function showNotification(){
+            //1° argumento é o titulo
+            //2º Opções
+            const notification = new Notification("New message from dcode!", {
+                body: "Hey mate, how are ya? You want to catch up soon?",
+                icon:"https://instagram.fpoa10-1.fna.fbcdn.net/v/t51.2885-19/s150x150/175093115_2851092928539821_5685121116825906271_n.jpg"
+            });
+
+            notification.onclick = (e) => {
+                window.location.href = "https://www.google.com";
+            }
+        }
+
+        //Notification.permission
+        //default = significa que o usuario nao disse sim ou nao
+        //granted = sim
+        //denied = não
+        console.log(Notification.permission)
+
+        if(Notification.permission === "granted"){
+            //alert("We have permission!")
+            showNotification();
+        }else if(Notification.permission !== "denied"){
+            Notification.requestPermission().then(permission => {
+                //console.info('Permissão:', permission)
+                if(permission === "granted"){
+                    showNotification();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
